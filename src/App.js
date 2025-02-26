@@ -1,6 +1,8 @@
+import Login from "./paginas/Login";
+
 function App() {
   return (
-    <p>Olá, mundo!</p>
+    <Login />
   );
 }
 
