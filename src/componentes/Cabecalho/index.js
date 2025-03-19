@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import logo from "../../arquivos/imagens/sgp_logo_horizontal.png";
 import Botao from "../Botao";
+import { GlobalContext } from "../../contextos/GlobalContext";
 
 function Cabecalho() {
+    const { logout } = useContext(GlobalContext);
+
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container">
@@ -37,7 +41,7 @@ function Cabecalho() {
                         </li>
                     </ul>
 
-                    <Botao texto="Sair" aoClicar={() => {}} />
+                    <Botao texto="Sair" aoClicar={logout} />
                 </div>
             </div>
         </nav>

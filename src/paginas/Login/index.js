@@ -1,8 +1,10 @@
 import './login.css';
 import logo from '../../arquivos/imagens/sgp_logo_vertical.png';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { GlobalContext } from '../../contextos/GlobalContext';
 
 function Login() {
+    const { login } = useContext(GlobalContext);
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [manterConectado, setManterConectado] = useState(true);
@@ -15,7 +17,7 @@ function Login() {
             setErro("Preencha todos os campos!")
         }
 
-        console.log({ email, senha, manterConectado });
+        login({ email, senha, manterConectado });
     }
 
     return (

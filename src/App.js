@@ -1,10 +1,11 @@
-import Login from "./paginas/Login";
-import Pagina404 from "./paginas/Pagina404";
+import { GlobalProvider } from "./contextos/GlobalContext";
+import Rotas from "./rotas";
 
 function App() {
   return (
-    // <Login />
-    <Pagina404 />
+    <GlobalProvider>
+      <Rotas />
+    </GlobalProvider>
   );
 }
 
