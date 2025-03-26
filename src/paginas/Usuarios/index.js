@@ -1,21 +1,29 @@
+import { useEffect, useState } from "react";
 import Cabecalho from "../../componentes/Cabecalho/index";
 import Rodape from "../../componentes/Rodape/index";
-import {USUARIOS} from "../../mocks/usuarios"
+import { listarUsuarios } from "../../servicos/usuarios";
+import { useNavigate } from "react-router-dom";
 
 
 function Usuarios() {
+    const navigate = useNavigate();
+    const [usuarios, setUsuarios] = useState([]);
+
+    useEffect(() => {
+        listarUsuarios(setUsuarios);
+    }, []);
     return (
         <>
             <Cabecalho></Cabecalho>
-            
+
             <section className="container mt-3" id="usuarios"></section>
             <div className="d-flex justify-content-between">
-            <h1>Usuarios</h1>
-            <div>
-                <a role="button" href="/novo-usuario" className="btn btn-primary">
-                    Novo Usuário
-                </a>
-            </div>
+                <h1>Usuarios</h1>
+                <div>
+                    <a role="button" href="/novo-usuario" className="btn btn-primary">
+                        Novo Usuário
+                    </a>
+                </div>
             </div>
             <table className="table table-hover">
                 <thead>
@@ -30,20 +38,25 @@ function Usuarios() {
                     </tr>
                 </thead>
                 <tbody>
-                {
-                    USUARIOS.map((usuario) => (
-                        <tr key={(usuario.id)}>
-                        <th scope="row">{usuario.id}</th>
-                        <td>{usuario.nome}</td>
-                        <td>{usuario.cpf}</td>
-                        <td>{usuario.email}</td>
-                        <td>{usuario.idade}</td>
-                        <td>{usuario.status}</td>
-                    </tr>
-                    ))
-                }
+                    {
+                        usuarios?.map((usuario) => (
+                            <tr key={(usuario.id)}>
+                                <th scope="row">{usuario.id}</th>
+                                <td>{usuario.nome}</td>
+                                <td>{usuario.cpf}</td>
+                                <td>{usuario.email}</td>
+                                <td>{usuario.idade}</td>
+                                <td>{usuario.status}</td>
+
+                                <div className="btn-group" role="group" >
+                                    <button type="button" className="btn btn-primary me-2" onClick={(() => {navigate(`/usuario/${ usuario.id }`)})}>Editar</button>
+                                    <button type="button" className="btn btn-danger">Excluir</button>
+                                </div>
+                            </tr>
+                        ))
+                    }
                 </tbody>
-              
+
             </table>
             <Rodape></Rodape>
         </>
